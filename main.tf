@@ -17,3 +17,13 @@ module "datacenter" {
   description         = var.dc_description
   sec_auth_protection = var.dc_sec_auth_protection
 }
+
+
+module "cube" {
+  source        = "./modules/cube"
+  depends_on    = [module.datacenter]
+
+  server_name   = var.server_name
+  image_name    = var.image_name
+  passwort_cube = var.passwort_cube
+}
