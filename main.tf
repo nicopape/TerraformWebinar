@@ -22,7 +22,7 @@ module "datacenter" {
 module "cube" {
   source        = "./modules/cube"
   depends_on    = [module.datacenter]
-
+  datacenter_id = module.datacenter.datacenter_id
   server_name   = var.server_name
   image_name    = var.image_name
   passwort_cube = var.passwort_cube

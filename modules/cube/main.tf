@@ -1,9 +1,18 @@
+terraform {
+  required_providers {
+    ionoscloud = {
+      source = "ionos-cloud/ionoscloud"
+      # Version im Modul optional; Root pinnt bereits auf 6.7.14
+    }
+  }
+}
+
 data "ionoscloud_template" "example" {
     name            = "Basic Cube XS"
 }
 
 resource "ionoscloud_lan" "example" {
-  datacenter_id     = module.datacenter.datacenter_id
+  datacenter_id     = var.datacenter_id
   public            = true
   name              = "Lan Example"
 }
@@ -13,7 +22,7 @@ resource "ionoscloud_cube_server" "example" {
   image_name        = var.image_name
   template_uuid     = data.ionoscloud_template.example.id
   image_password    = var.passwort_cube
-  datacenter_id     = module.datacenter.datacenter_id
+  datacenter_id     = var.datacenter_id
   volume {
     name            = "Volume Example"
     licence_type    = "LINUX" 
